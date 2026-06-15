@@ -1,0 +1,29 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data & checkpoints (too large for git)
+data/
+checkpoints/
+results/
+*.h5
+*.pt
+*.ckpt
+
+# OS
+.DS_Store
+Thumbs.db
