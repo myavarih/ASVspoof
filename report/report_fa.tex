@@ -19,6 +19,7 @@
 \usepackage{booktabs}
 \usepackage{multicol}
 \usepackage{graphicx}
+\graphicspath{{../results/}}
 \usepackage{amsmath}
 \usepackage{fontspec}
 
@@ -212,7 +213,7 @@
         center,
     ]
     \centering
-    ترکیب ۱۳ آزمایش:\\
+    ترکیب ۱۱ آزمایش موفق از ۱۳ طرح:\\
     \textbf{۴ استخراج‌کننده ویژگی} × \textbf{۳ معماری}
     \,+\, \textbf{\lr{RawNet2}}
     \end{tcolorbox}
@@ -298,10 +299,20 @@
 \end{itemize}
 \end{genbox}
 
-\begin{resultbox}{آمار مجموعه داده}
-\placeholder{جدول توزیع نمونه‌های واقعی و جعلی برای هر بخش (train/dev/eval) اینجا قرار می‌گیرد.}\\
-\placeholder{مثال: Train: X نمونه | Dev: Y نمونه | Eval: Z نمونه}
-\end{resultbox}
+\begin{table}[h!]
+\centering
+\caption{توزیع نمونه‌ها در مجموعه \lr{ASVspoof 2019 LA}}
+\label{tab:dataset}
+\begin{tabularx}{0.8\textwidth}{lccX}
+\toprule
+\textbf{بخش} & \textbf{واقعی} & \textbf{جعلی} & \textbf{مجموع} \\
+\midrule
+\lr{Train} & 2580 & 22800 & 25380 \\
+\lr{Dev}   & 2548 & 22296 & 24844 \\
+\lr{Eval}  & 7355 & 63882 & 71237 \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{خط لوله پیش‌پردازش}
 
@@ -483,9 +494,9 @@
 
 \section{جدول مقایسه‌ای}
 
-\begin{resultbox}{جدول نتایج کامل}
-\placeholder{جدول زیر پس از اجرای تمام آزمایش‌ها تکمیل می‌شود.}
-\end{resultbox}
+از ۱۳ آزمایش طراحی‌شده، ۱۱ آزمایش با موفقیت تکمیل شدند. آزمایش‌های
+\lr{cqcc\_res2net} و \lr{cqcc\_lcnn} به دلیل ناسازگاری ابعاد خروجی \lr{CQCC}
+با معماری‌های \lr{Res2Net} و \lr{LCNN} حذف شدند.
 
 \begin{table}[h!]
 \centering
@@ -497,42 +508,98 @@
     & \textbf{\lr{Dev EER}\%} & \textbf{\lr{Eval EER}\%}
     & \textbf{\lr{Dev tDCF}} & \textbf{\lr{Eval tDCF}} \\
 \midrule
-\lr{mfcc\_cnn}      & \lr{MFCC} & \lr{CNN}     & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{mfcc\_res2net}  & \lr{MFCC} & \lr{Res2Net} & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{mfcc\_lcnn}     & \lr{MFCC} & \lr{LCNN}    & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{lfcc\_cnn}      & \lr{LFCC} & \lr{CNN}     & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{lfcc\_res2net}  & \lr{LFCC} & \lr{Res2Net} & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{lfcc\_lcnn}     & \lr{LFCC} & \lr{LCNN}    & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{cqcc\_cnn}      & \lr{CQCC} & \lr{CNN}     & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{cqcc\_res2net}  & \lr{CQCC} & \lr{Res2Net} & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{cqcc\_lcnn}     & \lr{CQCC} & \lr{LCNN}    & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{sincconv\_cnn}  & \lr{Sinc} & \lr{CNN}     & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{sincconv\_res2net} & \lr{Sinc} & \lr{Res2Net} & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{sincconv\_lcnn} & \lr{Sinc} & \lr{LCNN}    & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
-\lr{raw\_rawnet2}   & موج خام   & \lr{RawNet2} & \placeholder{XX.XX} & \placeholder{XX.XX} & \placeholder{X.XXXX} & \placeholder{X.XXXX} \\
+\lr{mfcc\_cnn}      & \lr{MFCC} & \lr{CNN}     & 8.09 & 23.87 & 0.0081 & 0.0055 \\
+\lr{mfcc\_res2net}  & \lr{MFCC} & \lr{Res2Net} & 7.93 & 23.21 & 0.0352 & 0.0247 \\
+\lr{mfcc\_lcnn}     & \lr{MFCC} & \lr{LCNN}    & 4.09 & 23.60 & 0.0076 & 0.0056 \\
+\lr{lfcc\_cnn}      & \lr{LFCC} & \lr{CNN}     & 1.08 & 18.63 & 0.2484 & 0.1143 \\
+\lr{lfcc\_res2net}  & \lr{LFCC} & \lr{Res2Net} & 0.90 & 20.98 & 0.0057 & 0.0088 \\
+\lr{lfcc\_lcnn}     & \lr{LFCC} & \lr{LCNN}    & \textbf{0.50} & \textbf{16.39} & 0.1031 & 0.0311 \\
+\lr{cqcc\_cnn}      & \lr{CQCC} & \lr{CNN}     & 9.34 & 26.82 & 0.0166 & 0.0238 \\
+\lr{cqcc\_res2net}  & \lr{CQCC} & \lr{Res2Net} & \multicolumn{4}{c}{\textit{حذف شده}} \\
+\lr{cqcc\_lcnn}     & \lr{CQCC} & \lr{LCNN}    & \multicolumn{4}{c}{\textit{حذف شده}} \\
+\lr{sincconv\_cnn}  & \lr{Sinc} & \lr{CNN}     & 13.29 & 33.08 & 0.0054 & 0.0053 \\
+\lr{sincconv\_res2net} & \lr{Sinc} & \lr{Res2Net} & 17.03 & 34.12 & 0.0054 & 0.0053 \\
+\lr{sincconv\_lcnn} & \lr{Sinc} & \lr{LCNN}    & 9.14 & 29.45 & 0.0073 & 0.0069 \\
+\lr{raw\_rawnet2}   & موج خام   & \lr{RawNet2} & 9.53 & 27.86 & 0.0053 & 0.0053 \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{بهترین سیستم}
 
-\begin{resultbox}{بهترین ترکیب}
-\placeholder{بهترین آزمایش بر اساس \lr{Eval EER}:}\\
-\placeholder{آزمایش: [نام] | EER: XX.XX\% | min-tDCF: X.XXXX}
-\end{resultbox}
+\begin{genbox}{بهترین ترکیب بر اساس \lr{Eval EER}}
+\begin{itemize}[noitemsep]
+    \item \textbf{آزمایش:} \lr{lfcc\_lcnn}
+    \item \textbf{ویژگی:} \lr{LFCC} \quad \textbf{مدل:} \lr{LCNN}
+    \item \textbf{\lr{Eval EER}:} $16.39\%$ \quad \textbf{\lr{Dev EER}:} $0.50\%$
+    \item \textbf{\lr{Eval min-tDCF}:} $0.0311$ \quad \textbf{\lr{Dev min-tDCF}:} $0.1031$
+\end{itemize}
+\end{genbox}
+
+\begin{notebox}
+    اختلاف زیاد بین \lr{Dev EER} و \lr{Eval EER} (بیش از ۳۰ برابر) نشان‌دهنده
+    \textbf{بیش‌برازش} شدید به مجموعه توسعه است. این الگو در تمام آزمایش‌ها مشاهده
+    می‌شود و احتمالاً ناشی از تنوع بالاتر حمله‌ها در مجموعه ارزیابی
+    (\lr{A07}--\lr{A19} در مقابل \lr{A01}--\lr{A06}) و تعداد محدود دوره‌های
+    آموزش (۸ دوره) است.
+\end{notebox}
 
 \section{نمودار مقایسه‌ای}
 
-\begin{resultbox}{نمودار \lr{EER}}
-\placeholder{تصویر \lr{results\_comparison.png} اینجا قرار می‌گیرد.}\\
-\placeholder{\texttt{\textbackslash includegraphics[width=\textbackslash textwidth]\{results/results\_comparison.png\}}}
-\end{resultbox}
+شکل~\ref{fig:comparison} مقایسه \lr{Eval EER} تمام آزمایش‌های موفق را نشان می‌دهد.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{results_comparison.png}
+\caption{مقایسه \lr{Eval EER} آزمایش‌ها — مقدار کمتر بهتر است}
+\label{fig:comparison}
+\end{figure}
 
 \section{منحنی‌های آموزش}
 
-\begin{resultbox}{منحنی خطا و دقت}
-\placeholder{تصاویر \lr{*\_curve.png} برای هر آزمایش اینجا قرار می‌گیرند.}
-\end{resultbox}
+منحنی‌های خطا و دقت آموزش برای هر آزمایش در شکل‌های~\ref{fig:curves-mfcc}
+تا~\ref{fig:curves-raw} آورده شده‌اند.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.48\textwidth]{mfcc_cnn_curve.png}\hfill
+\includegraphics[width=0.48\textwidth]{mfcc_res2net_curve.png}\\[0.5em]
+\includegraphics[width=0.48\textwidth]{mfcc_lcnn_curve.png}
+\caption{منحنی‌های آموزش ترکیب‌های \lr{MFCC}}
+\label{fig:curves-mfcc}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.48\textwidth]{lfcc_cnn_curve.png}\hfill
+\includegraphics[width=0.48\textwidth]{lfcc_res2net_curve.png}\\[0.5em]
+\includegraphics[width=0.48\textwidth]{lfcc_lcnn_curve.png}
+\caption{منحنی‌های آموزش ترکیب‌های \lr{LFCC}}
+\label{fig:curves-lfcc}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.48\textwidth]{cqcc_cnn_curve.png}
+\caption{منحنی آموزش \lr{CQCC+CNN}}
+\label{fig:curves-cqcc}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.48\textwidth]{sincconv_cnn_curve.png}\hfill
+\includegraphics[width=0.48\textwidth]{sincconv_res2net_curve.png}\\[0.5em]
+\includegraphics[width=0.48\textwidth]{sincconv_lcnn_curve.png}
+\caption{منحنی‌های آموزش ترکیب‌های \lr{SincConv}}
+\label{fig:curves-sinc}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.48\textwidth]{raw_rawnet2_curve.png}
+\caption{منحنی آموزش \lr{RawNet2}}
+\label{fig:curves-raw}
+\end{figure}
 
 % =============================================================
 \chapter{بحث و نتیجه‌گیری}
@@ -540,20 +607,87 @@
 
 \section{تحلیل ویژگی‌ها}
 
-\begin{resultbox}{مقایسه ویژگی‌ها}
-\placeholder{پس از دریافت نتایج، مقایسه MFCC/LFCC/CQCC/SincConv از نظر EER و tDCF اینجا نوشته می‌شود.}
-\end{resultbox}
+\begin{table}[h!]
+\centering
+\caption{میانگین \lr{Eval EER} به تفکیک ویژگی}
+\label{tab:feature-avg}
+\begin{tabularx}{0.7\textwidth}{lcc}
+\toprule
+\textbf{ویژگی} & \textbf{میانگین \lr{Eval EER}\%} & \textbf{تعداد آزمایش} \\
+\midrule
+\lr{LFCC}     & 18.67 & 3 \\
+\lr{MFCC}     & 23.56 & 3 \\
+\lr{CQCC}     & 26.82 & 1 \\
+\lr{Raw}      & 27.86 & 1 \\
+\lr{SincConv} & 32.22 & 3 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\lr{LFCC} بهترین عملکرد را در میان ویژگی‌ها دارد. فیلتربانک خطی اطلاعات
+فرکانس بالا را بهتر از مقیاس ملی (\lr{MFCC}) حفظ می‌کند و این اطلاعات
+برای تشخیص مصنوعات ناشی از سنتز گفتار حیاتی هستند.
+
+\lr{MFCC} در رتبه دوم قرار دارد. \lr{CQCC} با وجود رزولوشن لگاریتمی
+مناسب، تنها با \lr{CNN} آزمایش شد و نتایج ضعیف‌تری داشت.
+
+\lr{SincConv} ضعیف‌ترین عملکرد را نشان داد. فیلتربانک یادگیرنده با ۸ دوره
+آموزش فرصت کافی برای تنظیم پارامترهای فیلتر ندارد و به دوره‌های بیشتری نیاز دارد.
 
 \section{تحلیل معماری‌ها}
 
-\begin{resultbox}{مقایسه معماری‌ها}
-\placeholder{پس از دریافت نتایج، مقایسه CNN/Res2Net/LCNN/RawNet2 اینجا نوشته می‌شود.}
-\end{resultbox}
+\begin{table}[h!]
+\centering
+\caption{میانگین \lr{Eval EER} به تفکیک معماری (فقط ویژگی‌های مشترک)}
+\label{tab:arch-avg}
+\begin{tabularx}{0.7\textwidth}{lcc}
+\toprule
+\textbf{معماری} & \textbf{میانگین \lr{Eval EER}\%} & \textbf{توضیح} \\
+\midrule
+\lr{LCNN}    & 23.14 & بهترین عملکرد متوسط \\
+\lr{CNN}     & 25.19 & ساده‌ترین معماری \\
+\lr{Res2Net} & 26.11 & پیچیده‌ترین معماری \\
+\lr{RawNet2} & 27.86 & فقط ورودی خام \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\lr{LCNN} با واحد \lr{MFM} بهترین عملکرد متوسط را دارد. عملیات حداکثر
+ویژگی‌نگاره نقش انتخاب ویژگی ضمنی را ایفا کرده و به مدل کمک می‌کند
+ویژگی‌های تمایزکننده‌تر را حفظ کند.
+
+\lr{CNN} با وجود سادگی، عملکرد رقابتی دارد. \lr{Res2Net} با وجود اتصالات
+باقیمانده چندمقیاسی و بلوک \lr{SE}، بهبود مشخصی نسبت به \lr{CNN} ایجاد
+نکرد. این نشان می‌دهد که پیچیدگی بیشتر معماری لزوماً به عملکرد بهتر منجر
+نمی‌شود، به‌ویژه با تعداد دوره‌های محدود آموزش.
+
+\lr{RawNet2} ضعیف‌تر از مدل‌های مبتنی بر ویژگی عمل کرد. پردازش مستقیم
+موج صوتی به آموزش طولانی‌تر و داده بیشتر نیاز دارد.
 
 \section{نتیجه‌گیری}
 
 \begin{thmbox}{نتیجه کلی}{conclusion}
-\placeholder{نتیجه‌گیری نهایی پس از تکمیل آزمایش‌ها درج می‌شود.}
+    از بین ۱۱ آزمایش موفق، ترکیب \lr{LFCC+LCNN} با \lr{Eval EER} برابر
+    $16.39\%$ بهترین عملکرد را کسب کرد. سه نتیجه اصلی:
+
+    \begin{enumerate}[noitemsep]
+        \item \textbf{ویژگی \lr{LFCC} برتر است:} فیلتربانک خطی با حفظ اطلاعات
+              فرکانس بالا، تشخیص مصنوعات سنتز را تسهیل می‌کند.
+        \item \textbf{معماری \lr{LCNN} مؤثر است:} واحد \lr{MFM} با انتخاب ویژگی
+              ضمنی، عملکرد بهتری نسبت به فعال‌سازی‌های استاندارد ارائه می‌دهد.
+        \item \textbf{شکاف تعمیم‌پذیری:} اختلاف بزرگ \lr{Dev/Eval EER} در تمام
+              آزمایش‌ها نشان‌دهنده نیاز به استراتژی‌های مقاوم‌سازی مانند
+              آموزش طولانی‌تر، افزوده‌سازی متنوع‌تر و روش‌های منظم‌سازی قوی‌تر است.
+    \end{enumerate}
 \end{thmbox}
+
+\begin{genbox}{پیشنهادها برای بهبود}
+\begin{itemize}[noitemsep]
+    \item افزایش تعداد دوره‌های آموزش (حداقل ۳۰ دوره با توقف زودهنگام فعال)
+    \item استفاده از افزوده‌سازی داده متنوع‌تر (\lr{SpecAugment}، \lr{RIR} واقعی)
+    \item بررسی ترکیب ویژگی‌ها (\lr{fusion}) برای پوشش ضعف‌های هر ویژگی
+    \item آزمایش \lr{CQCC} با \lr{Res2Net} و \lr{LCNN} پس از رفع مشکل ابعاد
+\end{itemize}
+\end{genbox}
 
 \end{document}
